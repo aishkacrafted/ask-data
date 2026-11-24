@@ -1,0 +1,30 @@
+{"message": "How many orders were placed in 1997?", "intent": "read"}
+{"message": "Which country has the most customers?", "intent": "read"}
+{"message": "Show me the top 5 products by revenue", "intent": "read"}
+{"message": "List all suppliers from Japan", "intent": "read"}
+{"message": "What was our total revenue last year?", "intent": "read"}
+{"message": "Which employee handled the most orders?", "intent": "read"}
+{"message": "How many products are discontinued?", "intent": "read"}
+{"message": "What is the average freight cost per order?", "intent": "read"}
+{"message": "Give me monthly sales for 1998", "intent": "read"}
+{"message": "Which customers have never ordered anything?", "intent": "read"}
+{"message": "Compare beverages and seafood revenue", "intent": "read"}
+{"message": "Find products that are low in stock", "intent": "read"}
+{"message": "Who are our biggest customers in Germany?", "intent": "read"}
+{"message": "How many orders shipped late?", "intent": "read"}
+{"message": "Show the number of products in each category", "intent": "read"}
+{"message": "What percentage of revenue comes from dairy?", "intent": "read"}
+{"message": "Which shipper is the cheapest on average?", "intent": "read"}
+{"message": "List orders over 1000 dollars", "intent": "read"}
+{"message": "Can you tell me which month had the most orders?", "intent": "read"}
+{"message": "I need a list of all customers in London", "intent": "read"}
+{"message": "Delete all orders from 1996", "intent": "write"}
+{"message": "Remove the discontinued products", "intent": "write"}
+{"message": "Update the price of Chai to 20", "intent": "write"}
+{"message": "Add a new customer called Acme Foods", "intent": "write"}
+{"message": "Change the shipping country of order 10248 to Canada", "intent": "write"}
+{"message": "Drop the employees table", "intent": "write"}
+{"message": "Set all discounts to zero", "intent": "write"}
+{"message": "Insert a new product named Maple Syrup", "intent": "write"}
+{"message": "Mark order 10250 as shipped today", "intent": "write"}
+{"message": "Clear out the old supplier records", "intent": "write"}

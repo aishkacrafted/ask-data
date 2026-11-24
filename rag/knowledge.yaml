@@ -1,0 +1,83 @@
+tables:
+  - name: orders
+    description: >
+      One row per customer order, placed between July 1996 and May 1998.
+      order_date is when the order was placed; shipped_date is when it shipped
+      (empty if not shipped yet). ship_country and ship_city are the delivery location.
+      freight is the shipping cost. ship_via is the shipper_id of the delivery company.
+      Join to customers on customer_id, to employees_public on employee_id,
+      to shippers on ship_via = shipper_id, and to order_details on order_id.
+    columns: order_id, customer_id, employee_id, order_date, required_date, shipped_date, ship_via, freight, ship_name, ship_city, ship_country
+
+  - name: order_details
+    description: >
+      One row per product within an order (an order line). Holds the price charged,
+      the quantity bought and the discount (0 to 0.25, a fraction). Use this table
+      for units sold, quantity and revenue. Join to orders on order_id and to
+      products on product_id. Counting rows here counts order lines, not orders.
+    columns: order_id, product_id, unit_price, quantity, discount
+
+  - name: products
+    description: >
+      One row per product the company sells (77 products), with its current list price,
+      stock level and whether it is discontinued (1 = discontinued, 0 = active).
+      Join to categories on category_id and to suppliers on supplier_id.
+    columns: product_id, product_name, supplier_id, category_id, quantity_per_unit, unit_price, units_in_stock, units_on_order, reorder_level, discontinued
+
+  - name: categories
+    description: >
+      One row per product category, such as Beverages, Condiments, Seafood and
+      Dairy Products (8 categories). Join to products on category_id.
+    columns: category_id, category_name, description
+
+  - name: customers
+    description: >
+      One row per customer company (91 customers), with contact person, city and country.
+      Join to orders on customer_id.
+    columns: customer_id, company_name, contact_name, contact_title, city, region, country, phone
+
+  - name: suppliers
+    description: >
+      One row per supplier company that provides products (29 suppliers), with
+      city and country. Join to products on supplier_id.
+    columns: supplier_id, company_name, contact_name, city, country, phone
+
+  - name: shippers
+    description: >
+      One row per delivery (shipping) company. Join to orders on
+      shippers.shipper_id = orders.ship_via.
+    columns: shipper_id, company_name, phone
+
+  - name: employees_public
+    description: >
+      One row per staff member (sales employees), with name, job title, hire date,
+      city and country. Private details are not included. reports_to is the
+      employee_id of their manager. Join to orders on employee_id to see which
+      employee handled which orders.
+    columns: employee_id, first_name, last_name, title, hire_date, city, country, reports_to
+
+glossary:
+  - term: revenue
+    meaning: "Money from sales = SUM(order_details.unit_price * order_details.quantity * (1 - order_details.discount))"
+  - term: sales
+    meaning: "Same as revenue unless the question asks for quantity"
+  - term: units sold
+    meaning: "SUM(order_details.quantity)"
+  - term: number of orders
+    meaning: "COUNT(DISTINCT orders.order_id); do not count order_details rows"
+  - term: order year or month
+    meaning: "Use orders.order_date, for example EXTRACT(YEAR FROM orders.order_date) = 1997 or DATE_TRUNC('month', orders.order_date)"
+  - term: shipped to a country
+    meaning: "Use orders.ship_country"
+  - term: customer country
+    meaning: "Use customers.country"
+  - term: active product
+    meaning: "products.discontinued = 0"
+  - term: discontinued product
+    meaning: "products.discontinued = 1"
+  - term: freight cost
+    meaning: "orders.freight, the shipping cost of an order"
+  - term: shipper or shipping company
+    meaning: "shippers.company_name, joined with shippers.shipper_id = orders.ship_via"
+  - term: not shipped
+    meaning: "orders.shipped_date IS NULL"
